@@ -69,8 +69,6 @@ namespace AI_FA
             if (SectorsCount != 0)
             {
                 double sectorAngle = (double)90.0 / SectorsCount;
-                BlackBox = new Class2();
-                BlackBox.Add(ImageExempl);
                 int CountOfBlackPoints = 0;
                 color = GetPixelArray(ImageExempl);
                 mini = color.GetLength(0);
@@ -95,20 +93,23 @@ namespace AI_FA
                             maxj = maxj > j ? maxj : j;
 
                         }
-                        double hipotenusa = Math.Sqrt(Math.Pow( i, 2) + Math.Pow(color.GetLength(1) - j, 2));
+                        double hipotenusa = Math.Sqrt(Math.Pow(i, 2) + Math.Pow(color.GetLength(1) - j, 2));
                         double angle = Math.Asin((double)i / hipotenusa) * (180.0 / Math.PI);
                         int n = 0;
                         do
                         {
-                            Console.WriteLine(sectorAngle + " " + n);
+
                             n++;
                         }
                         while (angle > n * sectorAngle);
                         if (gray == 255)
                         {
-                            gray = gray - n * 7;
+
+                            int m = 7;
+                            if (SectorsCount < 8) m = 17;
+                            gray = gray - n * m;
                         }
-                       
+
                         BlackWhite.SetPixel(i, j, Color.FromArgb(255, gray, gray, gray));
                     }
                 }
@@ -116,15 +117,29 @@ namespace AI_FA
                 richTextBox1.Text += "Count of black points: " + CountOfBlackPoints.ToString() + "\n";
                 using (Graphics g = Graphics.FromImage(BlackWhite))
                 {                   
-                    Pen pen = new Pen(Color.Red, 3);
-                    g.DrawRectangle(pen, mini, minj, maxi1, maxj);                    
+                    Pen pen = new Pen(Color.Red, 1);
+                    g.DrawRectangle(pen, mini, minj, maxi1-mini, maxj-minj);                    
                     pen.Dispose();
                 }
+               
+
                 pictureBox1.Image = BlackWhite;
                 pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+                BlackBox = new Class2();
+                Rectangle part = new Rectangle(mini, minj, maxi1 - mini, maxj - minj);
+                Bitmap clonedBitmap = ClonePartOfBitmap(ImageExempl, part);
+                BlackBox.Add(clonedBitmap);
+               
+
+
+               
             }
         }
-       
+        public Bitmap ClonePartOfBitmap(Bitmap sourceBitmap, Rectangle section)
+        {
+            // Clone the specified section of the bitmap.
+            return sourceBitmap.Clone(section, sourceBitmap.PixelFormat);
+        }
 
         public static Color[,] GetPixelArray(Bitmap imageExempl)
         {
