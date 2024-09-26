@@ -342,6 +342,7 @@ namespace AI_FA
                 if (classEntity[t])
                 {
                     richTextBox1.Text = richTextBox1.Text + "\n" + " Object recognized like:  class" + t.ToString();
+                    richTextBox1.Text = richTextBox1.Text + "\n";
                     for (int j = 0; j < HighLimS.Length; j++)
                     {
                         richTextBox1.Text = richTextBox1.Text + HighLimS[j].ToString("F3") + "  ";
