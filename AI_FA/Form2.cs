@@ -113,14 +113,14 @@ namespace AI_FA
                 using (Graphics g = Graphics.FromImage(BlackWhite))
                 {
                     Pen pen = new Pen(Color.Red, 1);
-                    g.DrawRectangle(pen, mini, minj, maxi - mini, maxj - minj);
+                    g.DrawRectangle(pen, mini, minj, (maxi - mini), (maxj - minj) );
                     pen.Dispose();
                 }
 
                 pictureBoxes[i - 1].Image = BlackWhite;
                 pictureBoxes[i - 1].SizeMode = PictureBoxSizeMode.Zoom;
 
-                Rectangle part = new Rectangle(mini, minj, maxi - mini, maxj - minj);
+                Rectangle part = new Rectangle(mini, minj , (maxi - mini) , (maxj - minj));
                 Bitmap clonedBitmap = Form1.ClonePartOfBitmap(ImageExempl, part);
                 Form1.ClassesBlackBox[NumbOfClass - 1].Add(clonedBitmap);
 

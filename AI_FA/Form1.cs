@@ -136,7 +136,7 @@ namespace AI_FA
                 pictureBox1.Image = BlackWhite;
                 pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
                 BlackBox = new Class2();
-                Rectangle part = new Rectangle(mini, minj, maxi1 - mini, maxj - minj);
+                Rectangle part = new Rectangle (mini, minj , maxi1 - mini , maxj - minj );
                 Bitmap clonedBitmap = ClonePartOfBitmap(ImageExempl, part);
                 BlackBox.Add(clonedBitmap);
 
@@ -257,9 +257,9 @@ namespace AI_FA
             for (int i = 0; i < ClassesBlackBox.Count; i++)
             {
                 buttons.Add(new Button());
-                buttons[i].Text = "CLASS " + (i).ToString();
-                buttons[i].Size = new System.Drawing.Size(115, 30);
-                buttons[i].Location = new System.Drawing.Point(0 + i * 129, 500);
+                buttons[i].Text =  (i).ToString();
+                buttons[i].Size = new System.Drawing.Size(50, 30);
+                buttons[i].Location = new System.Drawing.Point(0 + i * 58, 510);
 
                 if (i != ClassesBlackBox.Count - 1)
                 {
