@@ -328,22 +328,7 @@ namespace AI_FA
                 LowLimS = ClassesBlackBox[t].getLowLimit();
                 HighLimS = ClassesBlackBox[t].getHighLimit();
                 richTextBox1.Text = richTextBox1.Text + "\n";
-                for (int j = 0; j < LowLimS.Length; j++)
-                {
-                    richTextBox1.Text = richTextBox1.Text + LowLimS[j].ToString("F3") + "  ";
-                }
-                richTextBox1.Text = richTextBox1.Text + "\n";
-                richTextBox1.Text = richTextBox1.Text + "\n";
-
-                for (int j = 0; j < HighLimS.Length; j++)
-                {
-                    richTextBox1.Text = richTextBox1.Text + HighLimS[j].ToString("F3") + "  ";
-                }
-                richTextBox1.Text = richTextBox1.Text + "\n";
-
-
-
-                richTextBox1.Text = richTextBox1.Text + "\n\n";
+               
 
 
 
