@@ -87,22 +87,21 @@ namespace AI_FA
                                 Sectors[e, (SectorCount - 1) - (n-1)] += 1;
                             }
                         }
-                       
-                        
+
                     }
-                    for (int i = 0; i < Sectors.GetLength(1); i++)
+                    for (int i = 0; i < SectorCount; i++)
                     {
-                        SectorsS[e, i] = (double)SectorsS[e, i] / CountOfBlackPoints[e];
+                        SectorsS[e, i] = (double)Sectors[e, i] / (double)CountOfBlackPoints[e];
                     }
 
                 }
                 
                 classHighLimit = new double[SectorCount];
                 classLowLimit = new double[SectorCount];
-
                 for (int j = 0; j < SectorsS.GetLength(1); j++)
                 {
                     double min = SectorsS[0, j], max = SectorsS[0, j];
+
                     for (int i = 0; i < Sectors.GetLength(0); i++)
                     {
                         if (SectorsS[i, j] < min)
@@ -115,6 +114,7 @@ namespace AI_FA
                         }                    
                         
                     }
+
                     classLowLimit[j] = min;
                     classHighLimit[j] = max;
                 }
