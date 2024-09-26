@@ -342,21 +342,24 @@ namespace AI_FA
                 if (classEntity[t])
                 {
                     richTextBox1.Text = richTextBox1.Text + "\n" + " Object recognized like:  class" + t.ToString();
-                    richTextBox1.Text = richTextBox1.Text + "\n";
-
                     for (int j = 0; j < HighLimS.Length; j++)
                     {
                         richTextBox1.Text = richTextBox1.Text + HighLimS[j].ToString("F3") + "  ";
                     }
-                    richTextBox1.Text = richTextBox1.Text + "\n";
-
+                    richTextBox1.Text = richTextBox1.Text + "\n" + " Object " + "\n";
+                    for (int j = 0; j < FedoryshinAndriyS1.Length; j++)
+                    {
+                        richTextBox1.Text = richTextBox1.Text + FedoryshinAndriyS1[j].ToString("F3") + "  ";
+                    }
+                    richTextBox1.Text = richTextBox1.Text + "\n" + " Low lim " + "\n";
                     for (int j = 0; j < LowLimS.Length; j++)
                     {
                         richTextBox1.Text = richTextBox1.Text + LowLimS[j].ToString("F3") + "  ";
                     }
                     richTextBox1.Text = richTextBox1.Text + "\n";
 
-                }else
+                }
+                else
                 {
                     richTextBox1.Text = richTextBox1.Text + "Class  " + t + " are not recognized " + "\n"+"High lim" + "\n";
                     for (int j = 0; j < HighLimS.Length; j++)
@@ -379,33 +382,33 @@ namespace AI_FA
 
 
             }
-/*
-            for (int i = 0; i < classEntity.Length; i++)
-            {
-                if (classEntity[i])
-                {
-                    richTextBox1.Text = richTextBox1.Text + "\n" + " Object recognized like:  class" + i.ToString();
-                    richTextBox1.Text = richTextBox1.Text + "\n";
+            /*
+                        for (int i = 0; i < classEntity.Length; i++)
+                        {
+                            if (classEntity[i])
+                            {
+                                richTextBox1.Text = richTextBox1.Text + "\n" + " Object recognized like:  class" + i.ToString();
+                                richTextBox1.Text = richTextBox1.Text + "\n";
 
 
-                }
-                else
-                {
-                    richTextBox1.Text = richTextBox1.Text + "\n" + " Class " + i.ToString() + " are not recognized !!!";
-                    richTextBox1.Text = richTextBox1.Text + "\n";
-                }
+                            }
+                            else
+                            {
+                                richTextBox1.Text = richTextBox1.Text + "\n" + " Class " + i.ToString() + " are not recognized !!!";
+                                richTextBox1.Text = richTextBox1.Text + "\n";
+                            }
 
-                richTextBox1.Text = richTextBox1.Text + "\n";
+                            richTextBox1.Text = richTextBox1.Text + "\n";
 
-                richTextBox1.Text = richTextBox1.Text + "\n";
-                for (int j = 0; j < FedoryshinAndriyS1.Length; j++)
-                {
-                    richTextBox1.Text = richTextBox1.Text + FedoryshinAndriyS1[j].ToString("F3") + "  ";
-                }
-                richTextBox1.Text = richTextBox1.Text + "\n";
+                            richTextBox1.Text = richTextBox1.Text + "\n";
+                            for (int j = 0; j < FedoryshinAndriyS1.Length; j++)
+                            {
+                                richTextBox1.Text = richTextBox1.Text + FedoryshinAndriyS1[j].ToString("F3") + "  ";
+                            }
+                            richTextBox1.Text = richTextBox1.Text + "\n";
 
-            }*/
-
+                        }*/
+            BlackBox.Pop();
         }
 
         private void textBox1_MouseHover(object sender, EventArgs e)

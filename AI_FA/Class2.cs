@@ -157,6 +157,20 @@ namespace AI_FA
         {
             bitmapArray.Add(bitmap);
         }
+        public Bitmap Pop()
+        {
+            if (bitmapArray.Count == 0)
+                throw new InvalidOperationException("The array is empty.");
+
+            // Get the last bitmap in the array
+            Bitmap bitmap = bitmapArray[bitmapArray.Count - 1];
+
+            // Remove the last bitmap from the array
+            bitmapArray.RemoveAt(bitmapArray.Count - 1);
+
+            // Return the bitmap
+            return bitmap;
+        }
 
         // Повернення кількості елементів у масиві
         public int Count
