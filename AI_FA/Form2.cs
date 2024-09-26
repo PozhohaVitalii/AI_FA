@@ -133,6 +133,9 @@ namespace AI_FA
 
         }
 
-       
+        private void Form2_Load_1(object sender, EventArgs e)
+        {
+            if (Form1.SectorsCount == 0) { throw new Exception("Its no number for sectors"); }
+        }
     }
 }

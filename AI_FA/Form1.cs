@@ -28,9 +28,8 @@ namespace AI_FA
         public int NumbOFclasses = 0;
         public static List<Class2> ClassesBlackBox = new List<Class2>();
         List<Form> classForm = new List<Form>();
-        List< Button> buttons = new List<Button>();
-        private double[] LowLimS;
-        private double[] HighLimS;
+        List<Button> buttons = new List<Button>();
+
         public Form1()
         {
             InitializeComponent();
@@ -124,7 +123,7 @@ namespace AI_FA
                         BlackWhite.SetPixel(i, j, Color.FromArgb(255, gray, gray, gray));
                     }
                 }
-              // textBox1.Text = sectorAngle.ToString("F4");
+                // textBox1.Text = sectorAngle.ToString("F4");
                 richTextBox1.Text += "Count of black points: " + CountOfBlackPoints.ToString() + "\n";
                 using (Graphics g = Graphics.FromImage(BlackWhite))
                 {
@@ -244,6 +243,12 @@ namespace AI_FA
 
         private void button4_Click(object sender, EventArgs e)
         {
+            try
+            {
+                SectorsCount = int.Parse(textBox1.Text);
+            }
+            catch (Exception) { }
+
             NumbOFclasses++;
             ClassesBlackBox.Add(new Class2());
             classForm.Add(new Form2(NumbOFclasses));
@@ -310,61 +315,74 @@ namespace AI_FA
                 richTextBox1.Text = richTextBox1.Text + FedoryshinAndriyM1[i].ToString("F2") + "  ";
             }
 
-           
+
+            double[] LowLimS;
+            double[] HighLimS;
+
             bool[] classEntity = new bool[ClassesBlackBox.Count];
-
-            
-
             for (int t = 0; t < ClassesBlackBox.Count; t++)
             {
                 ClassesBlackBox[t].calcFirst();
                 classEntity[t] = true;
-                int[] LowLim = ClassesBlackBox[t].getLowLimit();
-                LowLimS = new double[LowLim.Length];
-                int[] HighLim = ClassesBlackBox[t].getHighLimit();
-                HighLimS = new double[HighLim.Length];
-                int[] BlackPoints = ClassesBlackBox[t].getCountOfBlackPoints(); 
-                for (int i = 0; i < LowLim.Length; i++)
-                {
-                    LowLimS[i] = (double)LowLim[i] / BlackPoints[i];
-                    HighLimS[i] = (double)HighLim[i] / BlackPoints[i];
-                }
-                
+                LowLimS = ClassesBlackBox[t].getLowLimit();
+                HighLimS = ClassesBlackBox[t].getHighLimit();
+                richTextBox1.Text = richTextBox1.Text + "\n\n";
 
-                for (int i = 0; i < LowLim.Length; i++)
+
+
+
+                for (int i = 0; i < LowLimS.Length; i++)
                 {
                     if (LowLimS[i] > FedoryshinAndriyS1[i]) classEntity[t] = false;
-                    if (HighLim[i] < FedoryshinAndriyS1[i]) classEntity[t] = false;
+                    if (HighLimS[i] < FedoryshinAndriyS1[i]) classEntity[t] = false;
                 }
+
+                if (classEntity[t])
+                {
+                    richTextBox1.Text = richTextBox1.Text + "\n" + " Object recognized like:  class" + t.ToString();
+                    richTextBox1.Text = richTextBox1.Text + "\n";
+
+                    for (int j = 0; j < HighLimS.Length; j++)
+                    {
+                        richTextBox1.Text = richTextBox1.Text + HighLimS[j].ToString("F3") + "  ";
+                    }
+                    richTextBox1.Text = richTextBox1.Text + "\n";
+
+                    for (int j = 0; j < LowLimS.Length; j++)
+                    {
+                        richTextBox1.Text = richTextBox1.Text + LowLimS[j].ToString("F3") + "  ";
+                    }
+                    richTextBox1.Text = richTextBox1.Text + "\n";
+
+                }
+
+
             }
+
             for (int i = 0; i < classEntity.Length; i++)
             {
                 if (classEntity[i])
                 {
                     richTextBox1.Text = richTextBox1.Text + "\n" + " Object recognized like:  class" + i.ToString();
                     richTextBox1.Text = richTextBox1.Text + "\n";
-                    for (int j = 0; j < HighLimS.Length; j++)
-                    {
-                        richTextBox1.Text = richTextBox1.Text + HighLimS[j].ToString("F2") + "  ";
-                    }
-                    richTextBox1.Text = richTextBox1.Text + "\n";
-                    for (int j = 0; j < FedoryshinAndriyS1.Length; j++)
-                    {
-                        richTextBox1.Text = richTextBox1.Text + FedoryshinAndriyS1[i].ToString("F2") + "  ";
-                    }
-                    richTextBox1.Text = richTextBox1.Text + "\n";
-                    for (int j = 0; j < LowLimS.Length; j++)
-                    {
-                        richTextBox1.Text = richTextBox1.Text + LowLimS[j].ToString("F2") + "  ";
-                    }
-                    richTextBox1.Text = richTextBox1.Text + "\n";
+
 
                 }
                 else
                 {
-                    richTextBox1.Text = richTextBox1.Text + "\n" + " Class " +i.ToString() +" are not recognized !!!";
+                    richTextBox1.Text = richTextBox1.Text + "\n" + " Class " + i.ToString() + " are not recognized !!!";
                     richTextBox1.Text = richTextBox1.Text + "\n";
                 }
+
+                richTextBox1.Text = richTextBox1.Text + "\n";
+
+                richTextBox1.Text = richTextBox1.Text + "\n";
+                for (int j = 0; j < FedoryshinAndriyS1.Length; j++)
+                {
+                    richTextBox1.Text = richTextBox1.Text + FedoryshinAndriyS1[j].ToString("F3") + "  ";
+                }
+                richTextBox1.Text = richTextBox1.Text + "\n";
+
             }
 
         }
@@ -375,7 +393,11 @@ namespace AI_FA
         }
         private void textBox1_Leave(object sender, EventArgs e)
         {
-            SectorsCount = int.Parse(textBox1.Text);
+            try
+            {
+                SectorsCount = int.Parse(textBox1.Text);
+            }
+            catch (Exception) { }
         }
 
         private void Form1_Load(object sender, EventArgs e)

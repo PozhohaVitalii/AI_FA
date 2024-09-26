@@ -100,7 +100,7 @@
             // 
             richTextBox1.Location = new Point(897, 12);
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(197, 529);
+            richTextBox1.Size = new Size(343, 529);
             richTextBox1.TabIndex = 5;
             richTextBox1.Text = "";
             // 
@@ -128,7 +128,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1117, 569);
+            ClientSize = new Size(1252, 569);
             Controls.Add(button5);
             Controls.Add(button4);
             Controls.Add(richTextBox1);

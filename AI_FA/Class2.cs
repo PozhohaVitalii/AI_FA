@@ -13,11 +13,12 @@ namespace AI_FA
         private List<Bitmap> bitmapArray = new List<Bitmap>();
         private List<Bitmap> BlackWhite = new List<Bitmap>();
         bool toGetBlackWhite = false;
-        public int[] classLowLimit;
-        public int[] classHighLimit;
+        public double[] classLowLimit;
+        public double[] classHighLimit;
         public int SectorCount = 0;
         private List<bool[,]> BlackPixels = new List<bool[,]>();
         private int[,] Sectors;
+        private double[,] SectorsS;
         public int[] CountOfBlackPoints;
         public void calcFirst()
         {
@@ -64,7 +65,9 @@ namespace AI_FA
                 catch (Exception e) {
                     Console.WriteLine(e.Message);
                 }
+                SectorsS = new double[bitmapArray.Count(),SectorCount];
                 double sectorAngle =(double) 90.0 / SectorCount;
+            
                 for (int e = 0; e < BlackPixels.Count(); e++)
                 {
                     for (int i = 0; i < BlackPixels[e].GetLength(0); i++)
@@ -84,24 +87,31 @@ namespace AI_FA
                                 Sectors[e, (SectorCount - 1) - (n-1)] += 1;
                             }
                         }
+                       
+                        
                     }
+                    for (int i = 0; i < Sectors.GetLength(1); i++)
+                    {
+                        SectorsS[e, i] = (double)SectorsS[e, i] / CountOfBlackPoints[e];
+                    }
+
                 }
                 
-                classHighLimit = new int[SectorCount];
-                classLowLimit = new int[SectorCount];
+                classHighLimit = new double[SectorCount];
+                classLowLimit = new double[SectorCount];
 
-                for (int j = 0; j < Sectors.GetLength(1); j++)
+                for (int j = 0; j < SectorsS.GetLength(1); j++)
                 {
-                    int min = Sectors[0, j], max = Sectors[0, j];
+                    double min = SectorsS[0, j], max = SectorsS[0, j];
                     for (int i = 0; i < Sectors.GetLength(0); i++)
                     {
-                        if (Sectors[i, j] < min)
+                        if (SectorsS[i, j] < min)
                         {
-                            min = Sectors[i, j];
+                            min = SectorsS[i, j];
                         }
-                        if (Sectors[i, j] > max)
+                        if (SectorsS[i, j] > max)
                         {
-                            max = Sectors[i, j];
+                            max = SectorsS[i, j];
                         }                    
                         
                     }
@@ -157,11 +167,11 @@ namespace AI_FA
         public int[,] getSector() {
             return Sectors;
         }
-        public int[] getLowLimit()
+        public double[] getLowLimit()
         {
             return classLowLimit;
         }
-        public int[] getHighLimit()
+        public double[] getHighLimit()
         {
             return classHighLimit;
         }
