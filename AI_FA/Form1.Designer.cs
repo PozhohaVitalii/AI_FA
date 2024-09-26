@@ -35,6 +35,8 @@
             button3 = new Button();
             openFileDialog1 = new OpenFileDialog();
             richTextBox1 = new RichTextBox();
+            button4 = new Button();
+            button5 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -57,6 +59,8 @@
             textBox1.TextAlign = HorizontalAlignment.Center;
             textBox1.TextChanged += textBox1_TextChanged;
             textBox1.MouseEnter += textBox1_MouseEnter;
+            textBox1.MouseLeave += textBox1_Leave;
+            textBox1.MouseHover += textBox1_MouseHover;
             // 
             // button1
             // 
@@ -100,11 +104,33 @@
             richTextBox1.TabIndex = 5;
             richTextBox1.Text = "";
             // 
+            // button4
+            // 
+            button4.Location = new Point(12, 378);
+            button4.Name = "button4";
+            button4.Size = new Size(214, 59);
+            button4.TabIndex = 6;
+            button4.Text = "Add CLASS";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
+            // button5
+            // 
+            button5.Location = new Point(12, 443);
+            button5.Name = "button5";
+            button5.Size = new Size(214, 59);
+            button5.TabIndex = 7;
+            button5.Text = "Classify";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1117, 569);
+            Controls.Add(button5);
+            Controls.Add(button4);
             Controls.Add(richTextBox1);
             Controls.Add(button3);
             Controls.Add(button2);
@@ -113,6 +139,7 @@
             Controls.Add(pictureBox1);
             Name = "Form1";
             Text = "Form1";
+            Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -127,5 +154,7 @@
         private Button button3;
         private OpenFileDialog openFileDialog1;
         private RichTextBox richTextBox1;
+        private Button button4;
+        private Button button5;
     }
 }

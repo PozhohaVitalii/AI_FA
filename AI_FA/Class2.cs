@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AI_FA
 {
-    internal class Class2
+    public class Class2
     {
         // Одновимірний динамічний масив Bitmap
         private List<Bitmap> bitmapArray = new List<Bitmap>();
@@ -18,7 +18,7 @@ namespace AI_FA
         public int SectorCount = 0;
         private List<bool[,]> BlackPixels = new List<bool[,]>();
         private int[,] Sectors;
-        public int CountOfBlackPoints = 0;
+        public int[] CountOfBlackPoints;
         public void calcFirst()
         {
             if (bitmapArray.Count != 0)
@@ -29,7 +29,7 @@ namespace AI_FA
                 foreach (Bitmap elem in bitmapArray) img1.Add(Form1.GetPixelArray(elem));
 
 
-               
+                CountOfBlackPoints = new int[img1.Count];
                 for (int e = 0; e < img1.Count(); e++)
                 {
                     BlackPixels.Add(new bool[img1[e].GetLength(0), img1[e].GetLength(1)]);
@@ -47,7 +47,7 @@ namespace AI_FA
                             else
                             {
                                 gray = 1;
-                                CountOfBlackPoints++;
+                                CountOfBlackPoints[e]++;
                                 BlackPixels[e][i, j] = true;
                             }
                             BlackWhite[e].SetPixel(i, j, Color.FromArgb(255, gray, gray, gray));
@@ -156,6 +156,18 @@ namespace AI_FA
 
         public int[,] getSector() {
             return Sectors;
+        }
+        public int[] getLowLimit()
+        {
+            return classLowLimit;
+        }
+        public int[] getHighLimit()
+        {
+            return classHighLimit;
+        }
+        public int[] getCountOfBlackPoints()
+        {
+            return CountOfBlackPoints;
         }
 
     }
