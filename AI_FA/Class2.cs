@@ -89,10 +89,10 @@ namespace AI_FA
                         }
 
                     }
-                    for (int i = 0; i < SectorCount; i++)
-                    {
-                        SectorsS[e, i] = (double)Sectors[e, i] / (double)CountOfBlackPoints[e];
-                    }
+                        for (int i = 0; i < SectorCount; i++)
+                        {
+                            SectorsS[e, i] = (double)Sectors[e, i] / (double)CountOfBlackPoints[e];
+                        }
 
                 }
                 

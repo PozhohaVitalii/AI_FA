@@ -46,11 +46,13 @@ namespace AI_FA
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     pictureBoxes.Add(new PictureBox());
-                    pictureBoxes[i - 1].Size = new Size(150, 150);
+                    pictureBoxes[i - 1].Size = new Size(110, 110);
                     pictureBoxes[i - 1].Image = Image.FromFile(openFileDialog.FileName);
-                    pictureBoxes[i - 1].Location = new Point((i - 1) * 200, 50);
+                    pictureBoxes[i - 1].Location = new Point((i - 1) * 110+10, 70);
                     pictureBoxes[i - 1].SizeMode = PictureBoxSizeMode.Zoom;
-                    button1.Location = new Point(i * 200, button1.Location.Y);
+                    
+                    if ((i - 1) * 110 +110 > this.Width ) this.Width = (i - 1) * 110 + 130;
+                    button1.Location = new Point(Width / 2 - 60, Height - 110);
                     ImageExempl = new Bitmap(pictureBoxes[i - 1].Image);
                     BlackWhite = new Bitmap(pictureBoxes[i - 1].Image);
 
@@ -80,17 +82,38 @@ namespace AI_FA
                         {
                             gray = 255;
                         }
-                        else
+                        else if (gray <= 128)
                         {
                             gray = 1;
-                            CountOfBlackPoints++;
                             mini = mini < i ? mini : i;
                             minj = minj < j ? minj : j;
                             maxi = maxi > i ? maxi : i;
                             maxj = maxj > j ? maxj : j;
+
                         }
-                        double hipotenusa = Math.Sqrt(Math.Pow(i, 2) + Math.Pow(color.GetLength(1) - j, 2));
-                        double angle = Math.Asin((double)i / hipotenusa) * (180.0 / Math.PI);
+                    }
+                }
+
+                for (int i = mini; i < maxi; i++)
+                {
+                    for (int j = minj; j < maxj; j++)
+                    {
+                        int gray = (int)(0.299 * color[i, j].R + 0.587 * color[i, j].G + 0.114 * color[i, j].B);
+                        if (gray > 128)
+                        {
+                            gray = 255;
+                        }
+                        else if (gray <= 128)
+                        {
+                            gray = 1;
+                            CountOfBlackPoints++;
+
+
+                        }
+                        double wCord = i - mini;
+                        double hCord = j - minj;
+                        double hipotenusa = Math.Sqrt(Math.Pow(wCord, 2) + Math.Pow(maxj - j, 2));
+                        double angle = Math.Asin((double)wCord / hipotenusa) * (180.0 / Math.PI);
                         int n = 0;
                         do
                         {

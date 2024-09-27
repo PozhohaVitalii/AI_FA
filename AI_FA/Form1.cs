@@ -95,16 +95,36 @@ namespace AI_FA
                         }
                         else if (gray <= 128)
                         {
-                            gray = 1;
-                            CountOfBlackPoints++;
+                            gray = 1;                          
                             mini = mini < i ? mini : i;
                             minj = minj < j ? minj : j;
                             maxi1 = maxi1 > i ? maxi1 : i;
                             maxj = maxj > j ? maxj : j;
 
                         }
-                        double hipotenusa = Math.Sqrt(Math.Pow(i, 2) + Math.Pow(color.GetLength(1) - j, 2));
-                        double angle = Math.Asin((double)i / hipotenusa) * (180.0 / Math.PI);
+                    }
+                }
+
+                for (int i = mini; i < maxi1; i++)
+                {
+                    for (int j = minj; j < maxj; j++)
+                    {
+                        int gray = (int)(0.299 * color[i, j].R + 0.587 * color[i, j].G + 0.114 * color[i, j].B);
+                        if (gray > 128)
+                        {
+                            gray = 255;
+                        }
+                        else if (gray <= 128)
+                        {
+                            gray = 1;
+                            CountOfBlackPoints++;
+                           
+
+                        }
+                        double wCord = i-mini;
+                        double hCord = j-minj;
+                        double hipotenusa = Math.Sqrt(Math.Pow(wCord, 2) + Math.Pow(maxj - j, 2));
+                        double angle = Math.Asin((double)wCord / hipotenusa) * (180.0 / Math.PI);
                         int n = 0;
                         do
                         {
@@ -133,11 +153,14 @@ namespace AI_FA
                 }
 
 
-                pictureBox1.Image = BlackWhite;
-                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
                 BlackBox = new Class2();
                 Rectangle part = new Rectangle (mini, minj , maxi1 - mini , maxj - minj );
+                Rectangle part1 = new Rectangle(mini, minj, maxi1 - mini+1, maxj - minj+1);
+
                 Bitmap clonedBitmap = ClonePartOfBitmap(ImageExempl, part);
+                Bitmap clonedBitmap1 = ClonePartOfBitmap(BlackWhite, part1);
+                pictureBox1.Image = clonedBitmap1;
+                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
                 BlackBox.Add(clonedBitmap);
 
 
