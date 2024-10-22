@@ -37,6 +37,7 @@
             richTextBox1 = new RichTextBox();
             button4 = new Button();
             button5 = new Button();
+            button6 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -64,7 +65,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(12, 178);
+            button1.Location = new Point(12, 78);
             button1.Name = "button1";
             button1.Size = new Size(214, 62);
             button1.TabIndex = 2;
@@ -74,7 +75,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(12, 246);
+            button2.Location = new Point(12, 146);
             button2.Name = "button2";
             button2.Size = new Size(214, 60);
             button2.TabIndex = 3;
@@ -84,7 +85,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(12, 312);
+            button3.Location = new Point(12, 212);
             button3.Name = "button3";
             button3.Size = new Size(214, 60);
             button3.TabIndex = 4;
@@ -106,7 +107,7 @@
             // 
             // button4
             // 
-            button4.Location = new Point(12, 378);
+            button4.Location = new Point(12, 278);
             button4.Name = "button4";
             button4.Size = new Size(214, 59);
             button4.TabIndex = 6;
@@ -116,7 +117,7 @@
             // 
             // button5
             // 
-            button5.Location = new Point(12, 443);
+            button5.Location = new Point(12, 343);
             button5.Name = "button5";
             button5.Size = new Size(214, 59);
             button5.TabIndex = 7;
@@ -124,11 +125,22 @@
             button5.UseVisualStyleBackColor = true;
             button5.Click += button5_Click;
             // 
+            // button6
+            // 
+            button6.Location = new Point(12, 408);
+            button6.Name = "button6";
+            button6.Size = new Size(214, 57);
+            button6.TabIndex = 8;
+            button6.Text = "byDistance";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1252, 569);
+            Controls.Add(button6);
             Controls.Add(button5);
             Controls.Add(button4);
             Controls.Add(richTextBox1);
@@ -156,5 +168,6 @@
         private RichTextBox richTextBox1;
         private Button button4;
         private Button button5;
+        private Button button6;
     }
 }

@@ -95,7 +95,7 @@ namespace AI_FA
                         }
                         else if (gray <= 128)
                         {
-                            gray = 1;                          
+                            gray = 1;
                             mini = mini < i ? mini : i;
                             minj = minj < j ? minj : j;
                             maxi1 = maxi1 > i ? maxi1 : i;
@@ -118,11 +118,11 @@ namespace AI_FA
                         {
                             gray = 1;
                             CountOfBlackPoints++;
-                           
+
 
                         }
-                        double wCord = i-mini;
-                        double hCord = j-minj;
+                        double wCord = i - mini;
+                        double hCord = j - minj;
                         double hipotenusa = Math.Sqrt(Math.Pow(wCord, 2) + Math.Pow(maxj - j, 2));
                         double angle = Math.Asin((double)wCord / hipotenusa) * (180.0 / Math.PI);
                         int n = 0;
@@ -154,8 +154,8 @@ namespace AI_FA
 
 
                 BlackBox = new Class2();
-                Rectangle part = new Rectangle (mini, minj , maxi1 - mini , maxj - minj );
-                Rectangle part1 = new Rectangle(mini, minj, maxi1 - mini+1, maxj - minj+1);
+                Rectangle part = new Rectangle(mini, minj, maxi1 - mini, maxj - minj);
+                Rectangle part1 = new Rectangle(mini, minj, maxi1 - mini + 1, maxj - minj + 1);
 
                 Bitmap clonedBitmap = ClonePartOfBitmap(ImageExempl, part);
                 Bitmap clonedBitmap1 = ClonePartOfBitmap(BlackWhite, part1);
@@ -280,7 +280,7 @@ namespace AI_FA
             for (int i = 0; i < ClassesBlackBox.Count; i++)
             {
                 buttons.Add(new Button());
-                buttons[i].Text =  (i).ToString();
+                buttons[i].Text = (i).ToString();
                 buttons[i].Size = new System.Drawing.Size(50, 30);
                 buttons[i].Location = new System.Drawing.Point(0 + i * 58, 510);
 
@@ -351,7 +351,7 @@ namespace AI_FA
                 LowLimS = ClassesBlackBox[t].getLowLimit();
                 HighLimS = ClassesBlackBox[t].getHighLimit();
                 richTextBox1.Text = richTextBox1.Text + "\n";
-               
+
 
 
 
@@ -385,12 +385,12 @@ namespace AI_FA
                 }
                 else
                 {
-                    richTextBox1.Text = richTextBox1.Text + "Class  " + t + " are not recognized " + "\n"+"High lim" + "\n";
+                    richTextBox1.Text = richTextBox1.Text + "Class  " + t + " are not recognized " + "\n" + "High lim" + "\n";
                     for (int j = 0; j < HighLimS.Length; j++)
                     {
                         richTextBox1.Text = richTextBox1.Text + HighLimS[j].ToString("F3") + "  ";
                     }
-                    richTextBox1.Text = richTextBox1.Text + "\n"+ " Object "+"\n";
+                    richTextBox1.Text = richTextBox1.Text + "\n" + " Object " + "\n";
                     for (int j = 0; j < FedoryshinAndriyS1.Length; j++)
                     {
                         richTextBox1.Text = richTextBox1.Text + FedoryshinAndriyS1[j].ToString("F3") + "  ";
@@ -450,6 +450,88 @@ namespace AI_FA
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (BlackBox.CountOfBlackPoints[0] == null)
+            {
+                BlackBox.calcFirst();
+            }
+            int[,] SignsVector = BlackBox.getSector();
+            double[] FedoryshinAndriyM1 = new double[SignsVector.GetLength(1)];
+            double[] FedoryshinAndriyS1 = new double[SignsVector.GetLength(1)];
+            double[] AbsoluteVector = new double[SignsVector.GetLength(1)];
+
+            for (int i = 0; i < SignsVector.GetLength(0); i++)
+            {
+                richTextBox1.Text = richTextBox1.Text + "\n Object Absolute vector \n";
+                for (int j = 0; j < SignsVector.GetLength(1); j++)
+                {
+                    FedoryshinAndriyM1[j] = SignsVector[i, j];
+                    FedoryshinAndriyS1[j] = SignsVector[i, j];
+                    AbsoluteVector[j] = SignsVector[i, j];
+                    richTextBox1.Text = richTextBox1.Text + " " + SignsVector[i, j];
+                }
+            }
+            double mx = FedoryshinAndriyM1.Max();
+            for (int i = 0; i < FedoryshinAndriyM1.Length; i++)
+            {
+
+                FedoryshinAndriyM1[i] = FedoryshinAndriyM1[i] / mx;
+                FedoryshinAndriyS1[i] = FedoryshinAndriyS1[i] / BlackBox.CountOfBlackPoints[0];
+            }
+            richTextBox1.Text = richTextBox1.Text + "\n FedoryshinAndriyS1\n ";
+            for (int i = 0; i < FedoryshinAndriyS1.Length; i++)
+            {
+                richTextBox1.Text = richTextBox1.Text + FedoryshinAndriyS1[i].ToString("F2") + "  ";
+            }
+            richTextBox1.Text = richTextBox1.Text + "\n FedoryshinAndriyM1\n";
+            for (int i = 0; i < FedoryshinAndriyM1.Length; i++)
+            {
+                richTextBox1.Text = richTextBox1.Text + FedoryshinAndriyM1[i].ToString("F2") + "  ";
+            }
+
+            richTextBox1.Text = richTextBox1.Text + "\n";
+            double[] LowLimS;
+            double[] HighLimS;
+            double[] CentreS;
+
+            double[] Distance = new double[ClassesBlackBox.Count];
+
+            bool[] classEntity = new bool[ClassesBlackBox.Count];
+            for (int t = 0; t < ClassesBlackBox.Count; t++)
+            {
+                if (ClassesBlackBox[t].CountOfBlackPoints[0] == null)
+                {
+                    ClassesBlackBox[t].calcFirst();
+                }
+                classEntity[t] = true;
+                LowLimS = ClassesBlackBox[t].getLowLimit();
+                HighLimS = ClassesBlackBox[t].getHighLimit();
+                CentreS = new double[LowLimS.Length];
+
+
+                richTextBox1.Text = richTextBox1.Text + "\n Class " + t + "  FedoryshinAndriyCentre\n";
+                double distance = 0;
+                for (int i = 0; i < LowLimS.Length; i++)
+                {
+                    CentreS[i] = (HighLimS[i] + LowLimS[i]) / 2;
+                    distance += Math.Abs(FedoryshinAndriyS1[i] - CentreS[i]);
+                    richTextBox1.Text = richTextBox1.Text + CentreS[i].ToString("F2") + " ";
+                }
+                richTextBox1.Text = richTextBox1.Text + "\n";
+                Distance[t] = distance;
+            }
+            int minInd = 0;
+            for (int i = 0; i < Distance.Length; i++)
+            {
+                if (Distance[i] < Distance[minInd]) minInd = i;
+                richTextBox1.Text = richTextBox1.Text + "\n D" + i + " =" + Distance[i];
+            }
+            richTextBox1.Text = richTextBox1.Text + "\n min D  is " + Distance[minInd] + "\n Object append to class - " + minInd;
+
 
         }
     }
