@@ -531,7 +531,7 @@ namespace AI_FA
                 richTextBox1.Text = richTextBox1.Text + "\n D" + i + " =" + Distance[i];
             }
             richTextBox1.Text = richTextBox1.Text + "\n min D  is " + Distance[minInd] + "\n Object append to class - " + minInd;
-
+            // ALL NEW
 
         }
     }
